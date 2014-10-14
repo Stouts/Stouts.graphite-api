@@ -1,0 +1,40 @@
+---
+
+- name: graphite-api-configure | Ensure the Graphite API user is exists
+  user: name={{graphite_api_user}}
+
+- name: graphite-api-configure | Ensure the Graphite API home is exists
+  file: state=directory owner={{graphite_api_user}} group={{graphite_api_group}} path={{graphite_api_home}}
+
+- name: graphite-api-configure | Setup virtualenv
+  shell: virtualenv {{graphite_api_home}}/env creates={{graphite_api_home}}/env/bin/pip
+  sudo: yes
+  sudo_user: "{{graphite_api_user}}"
+
+- name: graphite-api-configure | Install Graphit API
+  pip: name={{item}} executable={{graphite_api_home}}/env/bin/pip
+  sudo: yes
+  sudo_user: "{{graphite_api_user}}"
+  with_items: [flask, gunicorn, graphite-api]
+
+- name: graphite-api-configure | Install Graphit Whisper
+  pip: name=whisper executable={{graphite_api_home}}/env/bin/pip
+  sudo: yes
+  sudo_user: "{{graphite_api_user}}"
+  when: graphite_api_whisper
+
+- name: graphite-api-configure | Setup configuration
+  template: owner={{graphite_api_user}} group={{graphite_api_group}} dest={{graphite_api_home}}/config.yml src=config.yml.j2
+  notify: [ graphite-api restart ]
+
+- name: graphite-api-configure | Setup upstart
+  template: dest=/etc/init/graphite-api.conf src=upstart-api.conf.j2
+  notify: [ graphite-api restart ]
+
+- name: graphite-api-configure | Touch index file
+  file: state=touch path={{graphite_api_search_index}} owner={{graphite_api_user}} group={{graphite_api_group}}
+
+- name: graphite-api-configure | Configure nginx
+  template: src=nginx.conf.j2 dest={{nginx_sites_dir|default('/etc/nginx/sites-enabled')}}/graphite-api.conf
+  notify: [nginx reload]
+  when: nginx_enabled

@@ -1,0 +1,20 @@
+---
+dependencies:
+- Stouts.python
+- Stouts.nginx
+
+galaxy_info:
+  author: klen
+  company: Stouts
+  description: Install and configure Graphite API
+  license: MIT
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - system
+  - monitoring

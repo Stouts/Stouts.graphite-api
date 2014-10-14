@@ -1,0 +1,12 @@
+---
+
+- include: install.deb.yml
+  when: ansible_os_family == 'Debian'
+  tags: [graphite-api, graphite-api-install]
+
+- include: configure.yml
+  tags: [graphite-api, graphite-api-configure]
+
+- include: carbon.yml
+  tags: [graphite-api, graphite-api-carbon]
+  when: graphite_api_carbon

@@ -1,0 +1,9 @@
+---
+
+- name: graphite-api-install | Install dependencies
+  apt: pkg={{ item }}
+  with_items:
+  - libcairo2
+  - libffi-dev
+  - libffi6
+  - libyaml-dev
