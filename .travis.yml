@@ -27,5 +27,3 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   - ps -ef | grep [g]raphite_api || exit 1
-  - ps -ef
-  - cat /var/log/upstart/graphite-carbon.log
