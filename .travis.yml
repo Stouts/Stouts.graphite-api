@@ -26,5 +26,5 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
-- ps -ef | grep [g]raphite_api || exit 1
-- ps -ef | grep [c]arbon_cache || exit 1
+  - ps -ef | grep [g]raphite_api || exit 1
+  - ps -ef | grep [c]arbon_cache || exit 1
