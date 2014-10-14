@@ -4,6 +4,7 @@
   pip: name=carbon executable={{graphite_api_home}}/env/bin/pip extra_args="--install-option='--prefix={{graphite_api_home}}' --install-option='--install-lib={{graphite_api_home}}/lib'"
   sudo: yes
   sudo_user: "{{graphite_api_user}}"
+  changed_when: False
 
 - template: src=carbon_cache.py.j2 dest={{graphite_api_home}}/bin/carbon_cache.py owner={{graphite_api_user}} group={{graphite_api_group}} mode=0755
 

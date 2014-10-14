@@ -33,6 +33,7 @@
 
 - name: graphite-api-configure | Touch index file
   file: state=touch path={{graphite_api_search_index}} owner={{graphite_api_user}} group={{graphite_api_group}}
+  changed_when: False
 
 - name: graphite-api-configure | Configure nginx
   template: src=nginx.conf.j2 dest={{nginx_sites_dir|default('/etc/nginx/sites-enabled')}}/graphite-api.conf
