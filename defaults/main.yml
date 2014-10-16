@@ -2,7 +2,7 @@
 
 graphite_api_enabled: yes                     # The role is enabled
 
-graphite_api_home: /srv/graphite              # Installation directory
+graphite_api_home: /opt/graphite              # Installation directory
 graphite_api_user: graphite                   # Set owner
 graphite_api_group: "{{ graphite_api_user }}" # Set group
 

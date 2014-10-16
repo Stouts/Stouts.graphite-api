@@ -1,5 +1,10 @@
 ---
 
+- name: graphite-api-carbon | Install Twisted
+  pip: name=twisted executable={{graphite_api_home}}/env/bin/pip version=13.0
+  sudo: yes
+  sudo_user: "{{graphite_api_user}}"
+
 - name: graphite-api-carbon | Install Graphit Carbon
   pip: name=carbon executable={{graphite_api_home}}/env/bin/pip extra_args="--install-option='--prefix={{graphite_api_home}}' --install-option='--install-lib={{graphite_api_home}}/lib'"
   sudo: yes
@@ -7,11 +12,6 @@
   changed_when: False
 
 - template: src=carbon_cache.py.j2 dest={{graphite_api_home}}/bin/carbon_cache.py owner={{graphite_api_user}} group={{graphite_api_group}} mode=0755
-
-- name: graphite-api-carbon | Install Twisted
-  pip: name=twisted executable={{graphite_api_home}}/env/bin/pip version=13.0
-  sudo: yes
-  sudo_user: "{{graphite_api_user}}"
 
 - name: graphite-api-carbon | Compile Carbon configuration pt. 1
   template: src=carbon.conf.j2 dest={{graphite_api_home}}/conf/carbon.conf owner={{graphite_api_user}} group={{graphite_api_group}}
