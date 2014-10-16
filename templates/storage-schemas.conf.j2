@@ -7,16 +7,12 @@
 #  [name]
 #  pattern = regex
 #  retentions = timePerPoint:timeToStore, timePerPoint:timeToStore, ...
+{% for schema in graphite_api_storage_schemas %}
 
-[stats]
-priority = 110
-pattern = ^stats\..*
-retentions = 10s:6h,1m:7d,10m:1y
-
-[carbon]
-pattern = ^carbon\.
-retentions = 60:90d
-
-[default_1min_for_1day]
-pattern = .*
-retentions = 60s:1d
+[{{schema['name']}}]
+{% for name, value in schema.items() %}
+{% if name != 'name' %}
+{{ name }} = {{ value }}
+{% endif %}
+{% endfor %}
+{% endfor %}

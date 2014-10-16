@@ -32,6 +32,19 @@ graphite_api_carbon: yes                    # Install and setup Graphite Carbon
 # Setup Graphite-Whisper
 graphite_api_whisper: yes
 
+# Setup storage schemas
+graphite_api_storage_schemas:
+- name: stats
+  priority: 110
+  pattern: ^stats\..*
+  retentions: "10s:6h,1m:7d,10m:1y"
+- name: carbon
+  pattern: ^carbon\.
+  retentions: "60:90d"
+- name: default
+  pattern: ".*"
+  retentions: "60s:1d"
+
 # Setup Gunicorn
 graphite_api_gunicorn_host: 127.0.0.1
 graphite_api_gunicorn_port: 8080
