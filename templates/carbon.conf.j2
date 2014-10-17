@@ -77,9 +77,9 @@ LINE_RECEIVER_PORT = 2003
 # Set this to True to enable the UDP listener. By default this is off
 # because it is very common to run multiple carbon daemons and managing
 # another (rarely used) port for every carbon instance is not fun.
-ENABLE_UDP_LISTENER = False
-UDP_RECEIVER_INTERFACE = 0.0.0.0
-UDP_RECEIVER_PORT = 2003
+ENABLE_UDP_LISTENER = {{ True if graphite_api_carbon_udp else False }}
+UDP_RECEIVER_INTERFACE = {{ graphite_api_carbon_udp_address }}
+UDP_RECEIVER_PORT = {{ graphite_api_carbon_udp_port }}
 
 PICKLE_RECEIVER_INTERFACE = 0.0.0.0
 PICKLE_RECEIVER_PORT = 2004

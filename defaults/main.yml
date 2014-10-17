@@ -14,6 +14,9 @@ graphite_api_search_index: "{{graphite_api_home}}/index"
 
 # Setup Graphite-Carbon
 graphite_api_carbon: yes                    # Install and setup Graphite Carbon
+graphite_api_carbon_udp: no                 # Enable Carbon UDP listener
+graphite_api_carbon_udp_address: 0.0.0.0    # Listen address
+graphite_api_carbon_udp_port: 2003          # Listen port
 
 # Setup Graphite-Whisper
 graphite_api_whisper: yes
