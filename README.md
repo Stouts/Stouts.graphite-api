@@ -1,7 +1,9 @@
 Stouts.graphite-api
 ==============
 
-[![Build Status](https://travis-ci.org/Stouts/Stouts.graphite-api.png)](https://travis-ci.org/Stouts/Stouts.graphite-api)
+[![Build Status](http://img.shields.io/travis/Stouts/Stouts.graphite-api.svg?style=flat-square)](https://travis-ci.org/Stouts/Stouts.graphite-api)
+[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.graphite-api-blue.svg?style=flat-square)](https://galaxy.graphite-api.com/list#/roles/1944)
+[![Tag](http://img.shields.io/github/tag/Stouts/Stouts.graphite-api.svg?style=flat-square)]()
 
 Ansible role which manage [Graphite-API](http://graphite-api.readthedocs.org/en/latest/)
 
