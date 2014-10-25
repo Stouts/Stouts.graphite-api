@@ -23,15 +23,14 @@ server {
     client_max_body_size 150k;
     client_body_buffer_size 150k;
 
-{% if graphite_api_nginx_allow_origin %}
-    add_header  "Access-Control-Allow-Origin" "*";
-    add_header  "Access-Control-Allow-Credentials" "true";
-    add_header  "Access-Control-Allow-Methods" "GET, OPTIONS";
-    add_header  "Access-Control-Allow-Headers" "Authorization, origin, accept";
-{% endif %}
-
     location / {
-      proxy_pass        http://{{graphite_api_gunicorn_host}}:{{graphite_api_gunicorn_port}};
+        proxy_pass        http://{{graphite_api_gunicorn_host}}:{{graphite_api_gunicorn_port}};
+{% if graphite_api_nginx_allow_origin %}
+        add_header  "Access-Control-Allow-Origin" "*";
+        add_header  "Access-Control-Allow-Credentials" "true";
+        add_header  "Access-Control-Allow-Methods" "GET, OPTIONS";
+        add_header  "Access-Control-Allow-Headers" "Authorization, origin, accept";
+{% endif %}
     }
 
 }
