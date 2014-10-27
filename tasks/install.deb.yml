@@ -7,3 +7,7 @@
   - libffi-dev
   - libffi6
   - libyaml-dev
+
+- name: graphite-api-install | Setup passlib
+  apt: pkg=python-passlib
+  when: graphite_api_nginx_auth

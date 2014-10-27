@@ -39,3 +39,8 @@
   template: src=nginx.conf.j2 dest={{nginx_sites_dir|default('/etc/nginx/sites-enabled')}}/graphite-api.conf
   notify: [nginx reload]
   when: nginx_enabled
+
+- name: graphite-api-configure | Encrypt http auth passwords
+  htpasswd: path={{graphite_api_home}}/.htpasswd name={{item.name}} password={{item.password}}
+  with_items: graphite_api_nginx_auth_users
+  when: graphite_api_nginx_auth

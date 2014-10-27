@@ -18,7 +18,7 @@ Here is the list of all variables and their default values:
 ```yaml
 graphite_api_enabled: yes                     # The role is enabled
 
-graphite_api_home: /srv/graphite              # Installation directory
+graphite_api_home: /opt/graphite              # Installation directory
 graphite_api_user: graphite                   # Set owner
 graphite_api_group: "{{ graphite_api_user }}" # Set group
 
@@ -30,6 +30,9 @@ graphite_api_search_index: "{{graphite_api_home}}/index"
 
 # Setup Graphite-Carbon
 graphite_api_carbon: yes                    # Install and setup Graphite Carbon
+graphite_api_carbon_udp: no                 # Enable Carbon UDP listener
+graphite_api_carbon_udp_address: 0.0.0.0    # Listen address
+graphite_api_carbon_udp_port: 2003          # Listen port
 
 # Setup Graphite-Whisper
 graphite_api_whisper: yes
@@ -54,7 +57,11 @@ graphite_api_gunicorn_port: 8080
 # Setup NGINX
 graphite_api_nginx_host: "{{inventory_hostname}}"
 graphite_api_nginx_port: 80
-graphite_api_nginx_allow_origin: yes
+graphite_api_nginx_auth: no                         # Enable HTTP Authorization
+graphite_api_nginx_auth_users: []                   # Setup HTTP Auth users
+                                                    # graphite_api_nginx_auth_users:
+                                                    #   - { name: team, password: secret }
+graphite_api_nginx_allow_origin: ""                 # Set domain for enable CORS
 
 # The following parameters are for toggling dependencies
 nginx_enabled: yes

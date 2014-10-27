@@ -41,7 +41,12 @@ graphite_api_gunicorn_port: 8080
 # Setup NGINX
 graphite_api_nginx_host: "{{inventory_hostname}}"
 graphite_api_nginx_port: 80
-graphite_api_nginx_allow_origin: yes
+graphite_api_nginx_auth: no                         # Enable HTTP Authorization
+graphite_api_nginx_auth_users: []                   # Setup HTTP Auth users
+                                                    # graphite_api_nginx_auth_users:
+                                                    #   - { name: team, password: secret }
+
+graphite_api_nginx_allow_origin: ""                 # Set domain for enable CORS
 
 # The following parameters are for toggling dependencies
 nginx_enabled: yes
