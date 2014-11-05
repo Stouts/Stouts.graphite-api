@@ -27,12 +27,15 @@ graphite_api_storage_schemas:
   priority: 110
   pattern: ^stats\..*
   retentions: "10s:6h,1m:7d,10m:1y"
+- name: collectd
+  pattern: ^collectd\..*
+  retentions: "10s:6h,1m:7d,10m:1y"
 - name: carbon
   pattern: ^carbon\..*
   retentions: "60s:90d"
 - name: default
   pattern: ".*"
-  retentions: "60s:1d"
+  retentions: "1m:1d,10m:7d"
 
 # Setup Gunicorn
 graphite_api_gunicorn_host: 127.0.0.1
