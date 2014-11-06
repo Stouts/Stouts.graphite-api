@@ -30,3 +30,6 @@
 - name: graphite-api-carbon | Setup upstart
   template: dest=/etc/init/graphite-carbon.conf src=upstart-carbon.conf.j2
   notify: [ graphite-api restart ]
+
+- name: graphite-api-carbon | Ensure graphite-carbon is started
+  service: name=graphite-carbon state=started enabled=yes

@@ -7,7 +7,7 @@
   file: state=directory owner={{graphite_api_user}} group={{graphite_api_group}} path={{graphite_api_home}}
 
 - name: graphite-api-configure | Setup virtualenv
-  shell: virtualenv {{graphite_api_home}}/env creates={{graphite_api_home}}/env/bin/pip
+  shell: virtualenv {{graphite_api_home}}/env --python=python creates={{graphite_api_home}}/env/bin/pip
   sudo: yes
   sudo_user: "{{graphite_api_user}}"
 
@@ -44,3 +44,6 @@
   htpasswd: path={{graphite_api_home}}/.htpasswd name={{item.name}} password={{item.password}}
   with_items: graphite_api_nginx_auth_users
   when: graphite_api_nginx_auth
+
+- name: graphite-api-configure | Ensure graphite-api is started
+  service: name=graphite-api state=started enabled=yes
