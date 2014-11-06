@@ -36,9 +36,13 @@
   changed_when: False
 
 - name: graphite-api-configure | Configure nginx
-  template: src=nginx.conf.j2 dest={{nginx_sites_dir|default('/etc/nginx/sites-enabled')}}/graphite-api.conf
+  template: src=nginx.conf.j2 dest={{nginx_dir|default('/etc/nginx')}}/sites-available/graphite-api.conf
   notify: [nginx reload]
-  when: nginx_enabled
+  when: nginx_enabled and graphite_api_nginx
+
+- name: graphite-api-configure | Enable Nginx site
+  file: src={{nginx_dir|default('/etc/nginx')}}/sites-available/graphite-api.conf dest={{nginx_dir|default('/etc/nginx')}}/sites-enabled/graphite-api.conf state=link
+  when: nginx_enabled and graphite_api_nginx
 
 - name: graphite-api-configure | Encrypt http auth passwords
   htpasswd: path={{graphite_api_home}}/.htpasswd name={{item.name}} password={{item.password}}

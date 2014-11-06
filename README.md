@@ -2,13 +2,23 @@ Stouts.graphite-api
 ==============
 
 [![Build Status](http://img.shields.io/travis/Stouts/Stouts.graphite-api.svg?style=flat-square)](https://travis-ci.org/Stouts/Stouts.graphite-api)
-[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.graphite-api-blue.svg?style=flat-square)](https://galaxy.graphite-api.com/list#/roles/1944)
-[![Tag](http://img.shields.io/github/tag/Stouts/Stouts.graphite-api.svg?style=flat-square)]()
+[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.graphite-api-blue.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/1944)
 
 Ansible role which manage [Graphite-API](http://graphite-api.readthedocs.org/en/latest/)
 
 * Install and configure Graphite-Api
 * Install and configure Graphite-Carbon and Graphite-Whisper
+* Proxy the API with nginx
+
+#### Dependencies
+
+The roles are required:
+
+* [Stouts.python](https://github.com/Stouts/Stouts.python)
+
+The roles are recomended to install:
+
+* [Stouts.nginx](https://github.com/Stouts/Stouts.nginx) - for proxing Grafana with Nginx
 
 
 #### Variables
