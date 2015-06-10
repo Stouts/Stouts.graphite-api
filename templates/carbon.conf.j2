@@ -72,7 +72,7 @@ MAX_UPDATES_PER_SECOND = {{ graphite_api_carbon_max_updates_per_second }}
 MAX_CREATES_PER_MINUTE = {{ graphite_api_carbon_max_creates_per_minute }}
 
 LINE_RECEIVER_INTERFACE = 0.0.0.0
-LINE_RECEIVER_PORT = 2003
+LINE_RECEIVER_PORT = {{ graphite_api_carbon_line_port }}
 
 # Set this to True to enable the UDP listener. By default this is off
 # because it is very common to run multiple carbon daemons and managing
@@ -82,7 +82,7 @@ UDP_RECEIVER_INTERFACE = {{ graphite_api_carbon_udp_address }}
 UDP_RECEIVER_PORT = {{ graphite_api_carbon_udp_port }}
 
 PICKLE_RECEIVER_INTERFACE = 0.0.0.0
-PICKLE_RECEIVER_PORT = 2004
+PICKLE_RECEIVER_PORT = {{ graphite_api_carbon_pickle_port }}
 
 # Set to false to disable logging of successful connections
 LOG_LISTENER_CONNECTIONS = True
@@ -93,7 +93,7 @@ LOG_LISTENER_CONNECTIONS = True
 USE_INSECURE_UNPICKLER = False
 
 CACHE_QUERY_INTERFACE = 0.0.0.0
-CACHE_QUERY_PORT = 7002
+CACHE_QUERY_PORT = {{ graphite_api_carbon_cache_query_port }}
 
 # Set this to False to drop datapoints received after the cache
 # reaches MAX_CACHE_SIZE. If this is True (the default) then sockets
