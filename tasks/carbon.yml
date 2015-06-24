@@ -29,6 +29,12 @@
 
 - name: graphite-api-carbon | Setup upstart
   template: dest=/etc/init/graphite-carbon.conf src=upstart-carbon.conf.j2
+  when: graphite_api_service == 'upstart'
+  notify: [ graphite-api restart ]
+
+- name: graphite-api-carbon | Setup init
+  template: dest=/etc/init.d/graphite-carbon src=init-carbon.j2 mode=0755
+  when: graphite_api_service == 'init'
   notify: [ graphite-api restart ]
 
 - name: graphite-api-carbon | Ensure graphite-carbon is started

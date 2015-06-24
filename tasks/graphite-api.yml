@@ -4,6 +4,10 @@
   when: ansible_os_family == 'Debian'
   tags: [graphite-api, graphite-api-install]
 
+- include: install.yum.yml
+  when: ansible_os_family == 'RedHat'
+  tags: [graphite-api, graphite-api-install]
+
 - include: configure.yml
   tags: [graphite-api, graphite-api-configure]
 

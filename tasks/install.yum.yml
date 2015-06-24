@@ -1,0 +1,9 @@
+---
+
+- name: graphite-api-install | Install dependencies
+  yum: name={{ item }}
+  with_items:
+  - cairo-devel
+  - libffi-devel
+  - libyaml-devel
+  - python-passlib

@@ -7,7 +7,7 @@
   file: state=directory owner={{graphite_api_user}} group={{graphite_api_group}} path={{graphite_api_home}}
 
 - name: graphite-api-configure | Setup virtualenv
-  shell: virtualenv {{graphite_api_home}}/env --python=python creates={{graphite_api_home}}/env/bin/pip
+  shell: virtualenv {{graphite_api_home}}/env --python={{graphite_api_python}} creates={{graphite_api_home}}/env/bin/pip
   sudo: yes
   sudo_user: "{{graphite_api_user}}"
 
@@ -29,6 +29,12 @@
 
 - name: graphite-api-configure | Setup upstart
   template: dest=/etc/init/graphite-api.conf src=upstart-api.conf.j2
+  when: graphite_api_service == 'upstart'
+  notify: [ graphite-api restart ]
+
+- name: graphite-api-configure | Setup init
+  template: dest=/etc/init.d/graphite-api src=init-api.j2 mode=0755
+  when: graphite_api_service == 'init'
   notify: [ graphite-api restart ]
 
 - name: graphite-api-configure | Touch index file
