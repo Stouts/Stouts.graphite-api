@@ -43,6 +43,9 @@ graphite_api_carbon: yes                    # Install and setup Graphite Carbon
 graphite_api_carbon_udp: no                 # Enable Carbon UDP listener
 graphite_api_carbon_udp_address: 0.0.0.0    # Listen address
 graphite_api_carbon_udp_port: 2003          # Listen port
+graphite_api_carbon_line_port: 2003
+graphite_api_carbon_pickle_port: 2004
+graphite_api_carbon_cache_query_port: 7002
 
 # Setup Graphite-Whisper
 graphite_api_whisper: yes
