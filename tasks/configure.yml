@@ -8,19 +8,16 @@
 
 - name: graphite-api-configure | Setup virtualenv
   shell: virtualenv {{graphite_api_home}}/env --python={{graphite_api_python}} creates={{graphite_api_home}}/env/bin/pip
-  sudo: yes
-  sudo_user: "{{graphite_api_user}}"
+  become_user: "{{graphite_api_user}}"
 
 - name: graphite-api-configure | Install Graphit API
   pip: name={{item}} executable={{graphite_api_home}}/env/bin/pip
-  sudo: yes
-  sudo_user: "{{graphite_api_user}}"
+  become_user: "{{graphite_api_user}}"
   with_items: [flask, gunicorn, graphite-api]
 
 - name: graphite-api-configure | Install Graphit Whisper
   pip: name=whisper executable={{graphite_api_home}}/env/bin/pip
-  sudo: yes
-  sudo_user: "{{graphite_api_user}}"
+  become_user: "{{graphite_api_user}}"
   when: graphite_api_whisper
 
 - name: graphite-api-configure | Setup configuration
@@ -52,7 +49,7 @@
 
 - name: graphite-api-configure | Encrypt http auth passwords
   htpasswd: path={{graphite_api_home}}/.htpasswd name={{item.name}} password={{item.password}}
-  with_items: graphite_api_nginx_auth_users
+  with_items: "{{graphite_api_nginx_auth_users}}"
   when: graphite_api_nginx_auth
 
 - name: graphite-api-configure | Ensure graphite-api is started
