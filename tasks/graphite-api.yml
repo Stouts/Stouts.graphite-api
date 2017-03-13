@@ -1,5 +1,12 @@
 ---
 
+- name: Include OS-specific variables.
+  include_vars: "{{item}}"
+  with_first_found:
+  - "{{ ansible_os_family }}-{{ ansible_lsb.codename }}.yml"
+  - "{{ansible_os_family}}-default.yml"
+  - "default.yml"
+
 - include: install.deb.yml
   when: ansible_os_family == 'Debian'
   tags: [graphite-api, graphite-api-install]

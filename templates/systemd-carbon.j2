@@ -1,0 +1,17 @@
+[Unit]
+Description=Graphite Carbon Server
+After=local-fs.target network.target
+Requires=local-fs.target network.target
+
+[Service]
+User={{graphite_api_user}}
+Group={{graphite_api_group}}
+ExecStart={{graphite_api_home}}/bin/carbon_cache.py start --config={{graphite_api_home}}/conf/carbon.conf --pidfile={{graphite_api_home}}/storage/carbon-cache.pid
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
+

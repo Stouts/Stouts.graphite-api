@@ -1,0 +1,18 @@
+[Unit]
+Description=Graphite API
+After=local-fs.target network.target
+Requires=local-fs.target network.target
+
+[Service]
+User={{graphite_api_user}}
+Group={{graphite_api_group}}
+Environment=GRAPHITE_API_CONFIG={{graphite_api_home}}/config.yml
+ExecStart={{graphite_api_home}}/env/bin/gunicorn -w2 graphite_api.app:app -b {{graphite_api_gunicorn_host}}:{{graphite_api_gunicorn_port}}
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
+

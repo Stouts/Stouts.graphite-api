@@ -35,5 +35,10 @@
   when: graphite_api_service == 'init'
   notify: [ graphite-api restart ]
 
+- name: graphite-api-carbon | Setup systemd
+  template: dest=/etc/systemd/system/graphite-carbon.service src=systemd-carbon.j2
+  when: graphite_api_service == 'systemd'
+  notify: [ graphite-api restart ]
+
 - name: graphite-api-carbon | Ensure graphite-carbon is started
   service: name=graphite-carbon state=started enabled=yes

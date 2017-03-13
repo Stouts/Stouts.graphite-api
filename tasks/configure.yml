@@ -34,6 +34,11 @@
   when: graphite_api_service == 'init'
   notify: [ graphite-api restart ]
 
+- name: graphite-api-configure | Setup systemd
+  template: dest=/etc/systemd/system/graphite-api.service src=systemd-api.j2
+  when: graphite_api_service == 'systemd'
+  notify: [ graphite-api restart ]
+
 - name: graphite-api-configure | Touch index file
   file: state=touch path={{graphite_api_search_index}} owner={{graphite_api_user}} group={{graphite_api_group}}
   changed_when: False
