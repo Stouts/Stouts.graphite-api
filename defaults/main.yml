@@ -25,6 +25,7 @@ graphite_api_carbon_cache_query_port: 7002
 graphite_api_carbon_max_cache_size: inf
 graphite_api_carbon_max_updates_per_second: 500
 graphite_api_carbon_max_creates_per_minute: 50
+graphite_api_carbon_log_listener_connections: "False"
 
 # Setup Graphite-Whisper
 graphite_api_whisper: yes
