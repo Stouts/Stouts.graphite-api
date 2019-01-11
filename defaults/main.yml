@@ -45,6 +45,28 @@ graphite_api_storage_schemas:
   pattern: ".*"
   retentions: "1m:1d,10m:7d"
 
+graphite_api_storage_aggregations:
+- name: min
+  pattern: \.min$
+  xFilesFactor: 0.1
+  aggregationMethod: min
+- name: max
+  pattern: \.max$
+  xFilesFactor: 0.1
+  aggregationMethod: max
+- name: count
+  pattern: \.count$
+  xFilesFactor: 0
+  aggregationMethod: sum
+- name: gauge
+  pattern: \.gauge$
+  xFilesFactor: 0
+  aggregationMethod: last
+- name: default_average
+  pattern: .*
+  xFilesFactor: 0.5
+  aggregationMethod: average
+
 # Setup Gunicorn
 graphite_api_gunicorn_host: 127.0.0.1
 graphite_api_gunicorn_port: 8080
